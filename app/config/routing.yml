@@ -1,0 +1,3 @@
+analysis:
+    resource: "@AnalysisBundle/Resources/config/routing.yml"
+    prefix:   /

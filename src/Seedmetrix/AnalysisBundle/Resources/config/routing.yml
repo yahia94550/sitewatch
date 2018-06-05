@@ -1,0 +1,3 @@
+analysis_homepage:
+    path:     /
+    defaults: { _controller: AnalysisBundle:Default:index }
