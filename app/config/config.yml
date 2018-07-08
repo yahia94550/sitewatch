@@ -91,6 +91,7 @@ assetic:
                 - "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"            
             filters: [?yui_js]
             output: js/jquery.min.js
+            
         bootstrap_css:
             inputs:
                 - "%kernel.root_dir%/../vendor/twbs/bootstrap/less/bootstrap.less"
@@ -98,6 +99,7 @@ assetic:
                 - lessphp
                 - cssrewrite
             output: css/bootstrap.css
+            
         bootstrap_js:
             inputs:
                 - "%kernel.root_dir%/../vendor/twbs/bootstrap/js/affix.js"
@@ -113,7 +115,8 @@ assetic:
                 - "%kernel.root_dir%/../vendor/twbs/bootstrap/js/tab.js"
                 - "%kernel.root_dir%/../vendor/twbs/bootstrap/js/transition.js"
             filters: [?yui_js]
-            output: js/bootstrap.js        
+            output: js/bootstrap.js       
+            
         fonts_glyphicons_eot:
             inputs:
                 - "%kernel.root_dir%/../vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.eot"
@@ -130,4 +133,7 @@ assetic:
             inputs:
                 - "%kernel.root_dir%/../vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff"
             output: "fonts/glyphicons-halflings-regular.woff"
+            
+        cmen_google_charts:
+            version: "current"
     

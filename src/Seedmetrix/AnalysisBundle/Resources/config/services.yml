@@ -2,3 +2,5 @@ services:
 #    analysis.example:
 #        class: Seedmetrix\AnalysisBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+    filexist:
+        class: Seedmetrix\AnalysisBundle\CheckFile\CheckExistingFIle

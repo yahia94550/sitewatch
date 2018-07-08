@@ -34,3 +34,10 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+    app.chart.data:
+        class: AppBundle\Chart\ChartData
+        arguments: ['@doctrine.orm.entity_manager']
+
+    app.chart:
+        class: AppBundle\Chart\Chart
+        arguments: ['@app.chart.data']

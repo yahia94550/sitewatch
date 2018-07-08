@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Seedmetrix\AnalysisBundle\AnalysisBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
