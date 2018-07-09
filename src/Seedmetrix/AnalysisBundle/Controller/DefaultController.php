@@ -25,8 +25,8 @@ class DefaultController extends Controller
       //  if (!isset($file)) {
       if($existFile->FileExist($file));
         //throw new \Exception('Votre message a été détecté comme spam !');
-    //     return $this->render($info, '@Analysis/Default/error.html.twig');
+          return $this->render('@Analysis/Default/error.html.twig');
       //  }
-       return $this->render('@Analysis/Default/index.html.twig');
+     //  return $this->render('@Analysis/Default/index.html.twig');
     }
 }

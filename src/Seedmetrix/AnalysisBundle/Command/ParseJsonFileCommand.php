@@ -48,7 +48,7 @@ class ParseJsonFileCommand extends ContainerAwareCommand {
                 foreach ($match[1] as $k => $v) $dico[$k] = strip_tags($v);
             }
         }
-        $outputFile = 'C:\wamp64\www\input\monfichier.csv'; 
+        $outputFile = '/home/amine.yahia@onisep.fr/stage3/monfichier.csv';
         $fichier_csv = fopen($outputFile, 'a');
         if (($zip = zip_open($argv[2]))) {
             while ($zip_entry = zip_read($zip)) {
