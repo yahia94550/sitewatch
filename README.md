@@ -39,3 +39,10 @@ http://www.ustrem.org/en/articles/reading-xls-with-php-en/
 https://dyrk.org/2016/03/08/php-quelques-lignes-qui-transforme-un-fichier-excel-en-extract-csv/   ----------- top
 
 https://www.phpclasses.org/package/7965-PHP-Convert-data-from-Excel-spreadsheet-to-JSON-format.html à voir .....
+
+https://alain-sahli.developpez.com/tutoriels/php/ez/publish/administration/
+
+<!-- Source : https://jsfiddle.net/jlevaillant/6w5ju52v/11/?utm_source=website&utm_medium=embed&utm_campaign=6w5ju52v -->
+<!-- https://jolicode.com/blog/une-fenetre-modale-accessible -->
+
+// curl -i -H "Content-Type: application/json" -X POST -d '{"recherche":"jean v", "traitementApplication":"Ecran saisie commandes", "typeAction":"01",  "codeApplication":"01"}' http://rcu.onisep.fr:8080/rcuWS/service/client/etablissements/
