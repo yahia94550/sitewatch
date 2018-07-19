@@ -1,4 +1,57 @@
-{# empty Twig template #}
-{% for info in infos %}
-         {{ info.extension }}<br>
-   {% endfor %}
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+<body>
+<form method="post" action="">
+    <input type="text" id="mot_cle">
+</form>
+
+<div id="results">
+    <ul class="result">
+        {% for ville in villes %}
+           {# <li><a id="resultat_college" href="{{ path('college', {'id': college.id}) }}"></a> {{ dump(ville) }}</li>#}
+         <li><a id="resultat_college" href="#"></a> {{ ville.nom }}</li>
+{% endfor %}
+</ul>
+</div>
+
+<script>
+$(document).ready( function() {
+if (!jQuery('body').hasClass('searching')) {
+$('#mot_cle').keyup(function (e) {
+var contenu = $('#mot_cle').val();
+$('#results').html('');
+if (contenu.length > 2) {
+jQuery('#results').addClass('miniload');
+jQuery('#results').append('<div id="chargement">Chargement...<div id="spinner" class="spinner"></div></div>');
+console.log(contenu);
+setTimeout(function() {
+  $.ajax({
+      type: 'POST',
+      url: "{{ path('analysis_recherche') }}",
+      data: 'mot_cle=' + contenu,
+      success: function (data) {
+          jQuery('body').addClass('searching');
+          $('#results').html('');
+          jQuery('#chargement').remove();
+          $('#results').html(data);
+          return;
+      },
+      complete : function(){
+          jQuery('#chargement').remove();
+          return jQuery('body').removeClass('searching');
+      }
+  });
+}, 1000);
+}
+});
+}
+});
+var element = document.getElementById('mot_cle');
+element.addEventListener('click', function() {
+document.getElementById("searchReplay").value = "";
+});
+</script>
+</body>
+</html>

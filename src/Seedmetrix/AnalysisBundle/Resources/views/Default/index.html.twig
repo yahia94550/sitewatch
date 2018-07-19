@@ -1,5 +1,177 @@
-{% extends 'base.html.twig' %}
-{% block body %}
-    {{ parent() }}
-   <div 
-{% endblock %}      
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <style type="text/css">
+        .c-dialog {
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            padding: 2.4rem;
+            overflow-y: scroll;
+            /*  -webkit-overflow-scrolling: touch;*/
+            background-color: rgb(45, 45, 45);
+            transition: .2s;
+            opacity: 0.75;
+        }
+
+        /*dialog box*/
+        .c-dialog__box {
+            flex: 1;
+            max-width: 48rem;
+            margin: auto;
+            padding: 2.4rem;
+            background-color: white;
+        }
+
+        /*  hidden dialog */
+        .c-dialog[aria-hidden="true"] {
+            visibility: hidden;
+            opacity: 0;
+        }
+    </style>
+    <title>Choisir son collège</title>
+</head>
+<body class="js-page">
+<main class="js-document">
+    <button type="button" aria-haspopup="dialog" aria-controls="dialog">Choisir son collège</button>
+</main>
+<div id="dialog" role="dialog" aria-labelledby="dialog-title" aria-describedby="dialog-desc" aria-modal="true" aria-hidden="true" tabindex="-1"  class="c-dialog">
+    <div role="document" class="c-dialog__box">
+        <!--button type="button" aria-label="Fermer" title="Fermer cette fenêtre modale" data-dismiss="dialog">X</button-->
+        <h2 id="dialog-title">Choisis ton collège....</h2>
+        <p id="dialog-desc">Afin de trouver un stage de qualité autour de toi, séléctionnes ton collège dans la liste.</p>
+        <form action="" method="post">
+            <input type="text" id="collegechoice" name="collegestr"/>
+            <!--select name="college">
+                <option value="1">Jean villar</option>
+                <option value="2">Charles de Gaulle</option>
+            </select-->
+            </p>
+            <p>
+                <button type="submit" id="validcollege">Valider</button>
+
+            </p>
+
+        </form>
+        {{ dump(villes) }}
+    </div>
+</div>
+<script type="text/javascript">
+    const triggers = document.querySelectorAll('[aria-haspopup="dialog"]');
+    const doc = document.querySelector('.js-document');
+    const focusableElementsArray = [
+        '[href]',
+        'button:not([disabled])',
+        'input:not([disabled])',
+        'select:not([disabled])',
+        'textarea:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])',
+    ];
+    // Utilisation des touches claviers
+    const keyCodes = {
+        tab: 9,
+        enter: 13,
+        escape: 27,
+    };
+    const open = function (dialog) {
+        const focusableElements = dialog.querySelectorAll(focusableElementsArray);
+        const firstFocusableElement = focusableElements[0];
+        const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+        dialog.setAttribute('aria-hidden', false);
+        doc.setAttribute('aria-hidden', true);
+
+        // return if no focusable element
+        if (!firstFocusableElement) {
+            return;
+        }
+
+        window.setTimeout(() => {
+            firstFocusableElement.focus();
+
+            // trapping focus inside the dialog
+            focusableElements.forEach((focusableElement) => {
+                if (focusableElement.addEventListener) {
+                    focusableElement.addEventListener('keydown', (event) => {
+                        const tab = event.which === keyCodes.tab;
+
+                        if (!tab) {
+                            return;
+                        }
+
+                        if (event.shiftKey) {
+                            if (event.target === firstFocusableElement) { // shift + tab
+                                event.preventDefault();
+
+                                lastFocusableElement.focus();
+                            }
+                        } else if (event.target === lastFocusableElement) { // tab
+                            event.preventDefault();
+
+                            firstFocusableElement.focus();
+                        }
+                    });
+                }
+            });
+        }, 100);
+    };
+
+    const close = function (dialog, trigger) {
+        dialog.setAttribute('aria-hidden', true);
+        doc.setAttribute('aria-hidden', false);
+
+        // restoring focus
+        trigger.focus();
+    };
+
+    triggers.forEach((trigger) => {
+        const dialog = document.getElementById(trigger.getAttribute('aria-controls'));
+        const dismissTriggers = dialog.querySelectorAll('[data-dismiss]');
+
+        // open dialog
+        trigger.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            open(dialog);
+        });
+
+        trigger.addEventListener('keydown', (event) => {
+            if (event.which === keyCodes.enter) {
+                event.preventDefault();
+
+                open(dialog);
+            }
+        });
+
+        // close dialog
+        dialog.addEventListener('keydown', (event) => {
+            if (event.which === keyCodes.escape) {
+                close(dialog, trigger);
+            }
+        });
+// fonction pour fermé la fenêtre modale à partir d'un bouton
+        dismissTriggers.forEach((dismissTrigger) => {
+            const dismissDialog = document.getElementById(dismissTrigger.dataset.dismiss);
+
+            dismissTrigger.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                close(dismissDialog, trigger);
+            });
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === dialog) {
+                close(dialog, trigger);
+            }
+        });
+    });
+</script>
+</body>
+</html>

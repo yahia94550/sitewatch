@@ -1,3 +1,8 @@
 analysis_homepage:
-    path:     /
-    defaults: { _controller: AnalysisBundle:Default:index }
+    path:   /
+    defaults: { _controller: AnalysisBundle:Default:findCollege }
+#    methods: [GET]
+analysis_recherche:
+    path:   /recherche
+    defaults: { _controller: AnalysisBundle:Default:recherche }
+#    methods: [POST]
