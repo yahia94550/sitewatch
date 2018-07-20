@@ -46,3 +46,78 @@ https://alain-sahli.developpez.com/tutoriels/php/ez/publish/administration/
 <!-- https://jolicode.com/blog/une-fenetre-modale-accessible -->
 
 // curl -i -H "Content-Type: application/json" -X POST -d '{"recherche":"jean v", "traitementApplication":"Ecran saisie commandes", "typeAction":"01",  "codeApplication":"01"}' http://rcu.onisep.fr:8080/rcuWS/service/client/etablissements/
+
+
+
+###########################################
+twig :
+
+<div id="college_choice_popin">
+    <input type="text" id="myfield" style="position: absolute; z-index: 1111;"/> <!--  -->
+    <a class="rep" style="display:none;" href="#">Accéder à la bourse de stage</a>
+    <a class="no-rep" style="display:none;" href="#">Me faire aider dans mes recherches de stage</a>
+    <script>
+        $('#myfield').val('');
+        $('#provincie').selectedIndex = 0;
+        $('#college_choice_popin input[type="text"]').autocomplete({
+            minLength: 3,
+            source: '{{ path('onisep_stage3e_college_autocomplete') }}',
+            select: function (event, ui) {
+                if (ui.item.is_rep) {
+                    $('#college_choice_popin .rep').show();
+                    $('#college_choice_popin .no-rep').hide();
+                } else {
+                    $('#college_choice_popin .rep').hide();
+                    $('#college_choice_popin .no-rep').show();
+                }
+            },
+            messages: {
+                results: function() {}
+            }
+        });
+        $("rep").click(function(){
+            window.alert("Clic sur a#test1.");
+        });
+        $("no-rep").click(function(){
+            window.alert("Clic sur a#test1.");
+        });
+    </script>
+</div>
+######
+controller :
+ public function collegeAutocompleteAction(Request $request)
+    {
+        $searchText = $request->get('term');
+        $repository = $this->getRepository();
+        /** @var SearchService $searchService */
+        $searchService = $repository->getSearchService();
+        $query = new Query();
+        $query->limit = 10;
+        $query->criterion = new Query\Criterion\LogicalAnd([
+            new Query\Criterion\ContentTypeIdentifier('college'),
+            new Query\Criterion\Field('nom', Query\Criterion\Operator::LIKE, "%$searchText%"),
+        ]);
+        /** @var SearchResult $searchResult */
+        $searchResult = $searchService->findContent($query);
+        //$searchResult = "vilar";
+        $data = [];
+        foreach ($searchResult->searchHits as $searchHit) {
+            /** @var Content $content */
+            $content = $searchHit->valueObject;
+            /** @var FieldType\TextLine\Value $nomFieldValue */
+            $nomFieldValue = $content->getFieldValue('nom');
+            /** @var FieldType\TextLine\Value $communeFieldValue */
+            $communeFieldValue = $content->getFieldValue('commune');
+            /** @var FieldType\Checkbox\Value $repPlusFieldValue */
+            $repPlusFieldValue = $content->getFieldValue('isrep');
+            $isRep = $repPlusFieldValue ? $repPlusFieldValue->bool : null;
+
+            $data[] = [
+                'id' => $content->id,
+                'label' => "{$nomFieldValue->text} ({$communeFieldValue->text})",
+                'is_rep' => $isRep,
+            ];
+        }
+
+        return new JsonResponse($data);
+    }
