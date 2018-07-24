@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     const ACTION_TYPE_READ="01";
-    Const MYCONST_TYPE="03" ;
+
     public function indexAction()
     {
         return $this->render('@Analysis/Default/index.html.twig');
