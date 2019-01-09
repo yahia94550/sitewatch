@@ -10,10 +10,10 @@
                     Mon Super Analyseur de log
                 {% endblock %}
             </title>
-            {% block stylesheets %}
+            {% stylesheets '@AnalysisBundle/Resources/public/css/base.css' %}
                <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-               <link rel="stylesheet" href="{{ asset('css/base.css') }}">
-            {% endblock %}
+               <link rel="stylesheet" href="{{ asset_url }}">
+            {% endstylesheets %}
 <!-- Optional theme -->
 <!-- Latest compiled and minified JavaScript -->
         {% endblock %}
