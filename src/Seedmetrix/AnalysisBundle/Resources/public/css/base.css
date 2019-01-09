@@ -110,7 +110,14 @@
     }
 }
 
+.navbar-default {
+    background-color: #182c39;
+    border-color: #fff;
+}
 
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
 
 /* CSS used for positioning the footers at the bottom of the page. */
 /* You can remove this. */
