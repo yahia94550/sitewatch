@@ -121,3 +121,28 @@ controller :
 
         return new JsonResponse($data);
     }
+    
+    Utilser le framework Bootsrap : https://maryamdev.blogspot.com/2017/04/tuto-symfony-3-installation-bootstrap.html
+    
+    Utiliser un fichier de css perso : https://symfony.com/doc/3.4/frontend/assetic/asset_management.html
+    
+    Dans config.yml rubrique assetic:
+        Dans la ligne bundles : mettre le nom du bundle 
+        bundles:    [ AnalysisBundle ]
+        
+        Mettre le fichier css en question dans le bundle cité dans :
+        Ressources/publique/css/monfichier.css
+        
+        Dans la vue (twig) qui utilise le css mettre : 
+        
+        {% stylesheets '@AnalysisBundle/Resources/public/css/base.css' %}
+                       <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+                       <link rel="stylesheet" href="{{ asset_url }}">
+                    {% endstylesheets %}
+                    
+                    L'indication : asset('css/bootstrap.css') est pour utiliser les fichiers css bootstrap qui sont dans 
+                    le répertoire web.
+                    
+                    lancer la commande : php bin/console assetic:dump
+    
+    
