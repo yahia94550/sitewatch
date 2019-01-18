@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Seedmetrix\AnalysisBundle\AnalysisBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new Seedmetrix\ImportexcelBundle\SeedmetrixImportexcelBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
