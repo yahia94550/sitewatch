@@ -1,0 +1,3 @@
+seedmetrix_importexcel_homepage:
+    path:     /
+    defaults: { _controller: SeedmetrixImportexcelBundle:Default:index }
