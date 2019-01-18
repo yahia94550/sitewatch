@@ -19,12 +19,13 @@ class DefaultController extends Controller
         return $this->render('SeedmetrixImportexcelBundle:Default:index.html.twig');
     }
 
+    // voir  https://symfony.com/doc/current/controller/upload_file.html
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function importAction(Request $request)
+    public function uploadAction()
     {
-       // voir  https://symfony.com/doc/current/controller/upload_file.html
+        https://symfony.com/doc/current/controller/upload_file.html
     }
 }
