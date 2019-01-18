@@ -4,7 +4,8 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Seedmetrix\\AnalysisBundle\\": "src/Seedmetrix/AnalysisBundle"
+            "Seedmetrix\\AnalysisBundle\\": "src/Seedmetrix/AnalysisBundle",
+            "Seedmetrix\\ImportexcelBundle\\": "src/Seedmetrix/ImportexcelBundle"
         },
         "classmap": [
             "app/AppKernel.php",
