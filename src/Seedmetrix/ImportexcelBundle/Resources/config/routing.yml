@@ -1,3 +1,8 @@
 seedmetrix_importexcel_homepage:
     path:     /
     defaults: { _controller: SeedmetrixImportexcelBundle:Default:index }
+
+seedmetrix_importexcel_csv_import:
+    path:     /do
+    defaults: { _controller: SeedmetrixImportexcelBundle:Default:upload }
+
