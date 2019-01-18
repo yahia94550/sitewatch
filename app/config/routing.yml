@@ -1,3 +1,7 @@
+seedmetrix_importexcel:
+    resource: "@SeedmetrixImportexcelBundle/Resources/config/routing.yml"
+    prefix:   /
+
 analysis:
     resource: "@AnalysisBundle/Resources/config/routing.yml"
     prefix:   /
