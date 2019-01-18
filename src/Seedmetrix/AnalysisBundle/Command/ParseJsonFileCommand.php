@@ -32,16 +32,15 @@ class ParseJsonFileCommand extends ContainerAwareCommand
         // On récupére le nom du fichier donner en input sans son extension
         $filenamewithoutextension = $this->getFileNameWithoutExtension($argv[2]);
         // On nomme le fichier de sortie avec l'extension ".csv"
-        $outputFile = '/home/amine.yahia@onisep.fr/stage3/' . $filenamewithoutextension . '.csv';
+        $outputFile = '/home/amine.yahia@onisep.fr/www/sitewatch/web/uploads/csv/' . $filenamewithoutextension . '.csv';
         // On liste les feuilles du document à traiter
         $sheetinexceldoc = ['xl/worksheets/sheet1.xml'];/*,'xl/worksheets/sheet3.xml','xl/worksheets/sheet4.xml','xl/worksheets/sheet5.xml',
         'xl/worksheets/sheet6.xml', 'xl/worksheets/sheet7.xml', 'xl/worksheets/sheet8.xml', 'xl/worksheets/sheet9.xml', 'xl/worksheets/sheet10.xml'];*/
         // Entête de la page
-        $headpage = '"TITRE de l\'article";"DATE";"ID";"Collégien";"lycéen";"étudiant";"jeune diplômé";' .
-            '"parent";"équipe éducative et professionnels accompagnants";"métier";"formation/Etudes";' .
-            '"emploi";"agenda-événement";"procédure d’orientation";"handicap";"national";"régional";' .
-            '"académique";"multi-site";"international"';
-        $preg = "/équipe éducative et professionnels accompagnants/";
+        $headpage = '"id";"1/3";"1/4";"1/5";"1/6";"1/7";"1/8";"2/9";"2/10";"2/11";"2/12";"2/13";"2/14";"3/15";"3/16";"3/17";"3/18";"3/19"';
+        $datatoget = [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19];
+        $id=$collegientag=$lyceentag=$etudianttag=$jdtag=$parent=$eepa=$metier=$formationetudes="";
+        $emploi=$agendaeve=$procedureorientation=$handicap=$national=$regional=$academique=$multisite=$international="";
         //       Text Dictionnary
         $handle = fopen("zip://$argv[2]#xl/sharedStrings.xml", 'r');
         if ($handle) {
@@ -79,18 +78,76 @@ class ParseJsonFileCommand extends ContainerAwareCommand
                                     //  Extract All Record from Line
                                     $allligne = "";
                                     foreach ($rowData as $k => $v) {
+                                        if (in_array($k, $datatoget)){
+ //                                           echo $k . "\n";
                                         if (strstr($row[0][$k], 't="s"')) $v = str_replace("\n", '\n', $dico[$v]);
-                                        $ligne = '"' . addslashes(($v == '/>') ? '' : $v) . '";';
-                                        $allligne = $allligne . $ligne;
+                                            $objectId = explode(',', $v);
+                                            if(2 == $k) {
+                                                if( 2 == sizeof($objectId)){
+                                                   // echo "\n----------------\n";
+                                                    $id = trim(preg_replace('/[^0-9]/', '', $objectId[1]));
+                                                   // echo $ligne;
+                                                   // echo "\n----------------\n";
+                                                }
+                                            }elseif(3 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $collegientag = 3 : $collegientag = 0;
+                                            }elseif(4 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $lyceentag = 4 : $lyceentag = 0;
+                                            }elseif(5 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $etudianttag = 5 : $etudianttag = 0;
+                                            }elseif(6 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $jdtag = 6 : $jdtag = 0;
+                                            }elseif(7 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $parent = 7 : $parent = 0;
+                                            }elseif(8 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $eepa = 8 : $eepa = 0;
+                                            }elseif(9 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $metier = 9 : $metier = 0;
+                                            }elseif(10 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $formationetudes = 10 : $formationetudes = 0;
+                                            }elseif(11 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $emploi = 11 : $emploi = 0;
+                                            }elseif(12 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $agendaeve = 12 : $agendaeve = 0;
+                                            }elseif(13 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $procedureorientation = 13 : $procedureorientation = 0;
+                                            }elseif(14 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $handicap = 14 : $handicap = 0;
+                                            }elseif(15 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $national = 15 : $national = 0;
+                                            }elseif(16 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $regional = 16 : $regional = 0;
+                                            }elseif(17 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $academique = 17 : $academique = 0;
+                                            }elseif(18 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $multisite = 18 : $multisite = 0;
+                                            }elseif(19 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $international = 19 : $international = 0;
+                                            }
+
+ //                                       var_dump($v);
+//                                        die();
+                                        //$ligne = '"' . addslashes(($v == '/>') ? '' : $v) . '";';
+                                 //       $ligne = addslashes(($v == '/>') ? '' : $v) . ';';
+                                 //       $allligne = $allligne . $ligne;
                                         //  echo $ligne;
                                         //  fputs($fichier_csv, $ligne);
                                     }
-                                    if (!preg_match_all($preg, $allligne)) {
-                                        echo $allligne;
-                                        echo "\n";
+                                    }
+                                   // if (!preg_match_all($preg, $allligne)) {
+                                    //    echo $allligne;
+                                    //    echo "\n";
+                                    $allligne = $id.";".$collegientag.";".$lyceentag.";".
+                                        $etudianttag.";".$jdtag.";".$parent.";".
+                                        $eepa.";".$metier.";".$formationetudes.";".
+                                        $emploi.";".$agendaeve.";".$procedureorientation.";".
+                                        $handicap.";".$national.";".$regional.";".
+                                        $academique.";".$multisite.";".$international;
+                                    echo $allligne ;
+                                    echo "\n" ;
                                         fputs($fichier_csv, $allligne);
                                         fputs($fichier_csv, "\n");
-                                    }
+                                  //  }
                                 }
                             }
                         }
