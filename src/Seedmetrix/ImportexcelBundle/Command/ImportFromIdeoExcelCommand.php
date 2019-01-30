@@ -134,30 +134,24 @@ class ImportFromIdeoExcelCommand extends ContainerAwareCommand
                                             }elseif(19 == $k && 2 > mb_strlen($v) ){
                                                 1 == mb_strlen($v) ? $international = 19 : $international = 0;
                                             }
-
-                                            //                                       var_dump($v);
-//                                        die();
-                                            //$ligne = '"' . addslashes(($v == '/>') ? '' : $v) . '";';
-                                            //       $ligne = addslashes(($v == '/>') ? '' : $v) . ';';
-                                            //       $allligne = $allligne . $ligne;
-                                            //  echo $ligne;
-                                            //  fputs($fichier_csv, $ligne);
                                         }
                                     }
-                                    // if (!preg_match_all($preg, $allligne)) {
-                                    //    echo $allligne;
-                                    //    echo "\n";
-                                    $allligne = $id.";".$collegientag.";".$lyceentag.";".
-                                        $etudianttag.";".$jdtag.";".$parent.";".
-                                        $eepa.";".$metier.";".$formationetudes.";".
-                                        $emploi.";".$agendaeve.";".$procedureorientation.";".
-                                        $handicap.";".$national.";".$regional.";".
-                                        $academique.";".$multisite.";".$international;
-                                    echo $allligne ;
-                                    echo "\n" ;
-                                    fputs($fichier_csv, $allligne);
-                                    fputs($fichier_csv, "\n");
-                                    //  }
+                                    $check = (int)$collegientag + (int)$lyceentag + (int)$etudianttag + (int)$jdtag + (int)$parent +
+                                        (int)$eepa + (int)$metier + (int)$formationetudes + (int)$emploi + (int)$agendaeve +
+                                        (int)$procedureorientation + (int)$handicap ;
+
+                                    if('' != $id && 0 != $check ) {
+                                        $allligne = $id . ";" . $collegientag . ";" . $lyceentag . ";" .
+                                            $etudianttag . ";" . $jdtag . ";" . $parent . ";" .
+                                            $eepa . ";" . $metier . ";" . $formationetudes . ";" .
+                                            $emploi . ";" . $agendaeve . ";" . $procedureorientation . ";" .$handicap ;
+//                                            . ";" . $national . ";" . $regional . ";" .
+//                                            $academique . ";" . $multisite . ";" . $international;
+                                        echo $allligne;
+                                        echo "\n";
+                                        fputs($fichier_csv, $allligne);
+                                        fputs($fichier_csv, "\n");
+                                    }
                                 }
                             }
                         }
