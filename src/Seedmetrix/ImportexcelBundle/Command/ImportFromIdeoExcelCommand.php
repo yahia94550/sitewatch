@@ -100,48 +100,48 @@ class ImportFromIdeoExcelCommand extends ContainerAwareCommand
                                                     // echo "\n----------------\n";
                                                 }
                                             }elseif(3 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $collegientag = 3 : $collegientag = 0;
+                                                1 == mb_strlen($v) ? $collegientag = '\'Collégien\'' : $collegientag = '';
                                             }elseif(4 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $lyceentag = 4 : $lyceentag = 0;
+                                                1 == mb_strlen($v) ? $lyceentag = '\'Lycéen\'' : $lyceentag = '';
                                             }elseif(5 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $etudianttag = 5 : $etudianttag = 0;
+                                                1 == mb_strlen($v) ? $etudianttag = '\'Étudiant\'' : $etudianttag = '';
                                             }elseif(6 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $jdtag = 6 : $jdtag = 0;
+                                                1 == mb_strlen($v) ? $jdtag = '\'Jeune diplômé\'' : $jdtag = '';
                                             }elseif(7 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $parent = 7 : $parent = 0;
+                                                1 == mb_strlen($v) ? $parent = '\'Parent\'' : $parent = '';
                                             }elseif(8 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $eepa = 8 : $eepa = 0;
+                                                1 == mb_strlen($v) ? $eepa = '\'Équipe éducative et professionnels accompagnants\'' : $eepa = '';
                                             }elseif(9 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $metier = 9 : $metier = 0;
+                                                1 == mb_strlen($v) ? $metier = '\'Métier\'' : $metier = '';
                                             }elseif(10 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $formationetudes = 10 : $formationetudes = 0;
+                                                1 == mb_strlen($v) ? $formationetudes = '\'Formation\'' : $formationetudes = '';
                                             }elseif(11 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $emploi = 11 : $emploi = 0;
+                                                1 == mb_strlen($v) ? $emploi = '\'Emploi\'' : $emploi = '';
                                             }elseif(12 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $agendaeve = 12 : $agendaeve = 0;
+                                                1 == mb_strlen($v) ? $agendaeve = '\'Agenda- événement\'' : $agendaeve = '';
                                             }elseif(13 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $procedureorientation = 13 : $procedureorientation = 0;
+                                                1 == mb_strlen($v) ? $procedureorientation = '\'Procédure d’orientation\'' : $procedureorientation = '';
                                             }elseif(14 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $handicap = 14 : $handicap = 0;
-                                            }elseif(15 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $national = 15 : $national = 0;
-                                            }elseif(16 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $regional = 16 : $regional = 0;
-                                            }elseif(17 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $academique = 17 : $academique = 0;
-                                            }elseif(18 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $multisite = 18 : $multisite = 0;
-                                            }elseif(19 == $k && 2 > mb_strlen($v) ){
-                                                1 == mb_strlen($v) ? $international = 19 : $international = 0;
+                                                1 == mb_strlen($v) ? $handicap = '\'Handicap\'' : $handicap = '';
                                             }
+                                            /*elseif(15 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $national = '\'Collégien\'' : $national = 0;
+                                            }elseif(16 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $regional = '\'Collégien\'' : $regional = 0;
+                                            }elseif(17 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $academique = '\'Collégien\'' : $academique = 0;
+                                            }elseif(18 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $multisite = '\'Collégien\'' : $multisite = 0;
+                                            }elseif(19 == $k && 2 > mb_strlen($v) ){
+                                                1 == mb_strlen($v) ? $international = '\'Collégien\'' : $international = 0;
+                                            }*/
                                         }
                                     }
-                                    $check = (int)$collegientag + (int)$lyceentag + (int)$etudianttag + (int)$jdtag + (int)$parent +
-                                        (int)$eepa + (int)$metier + (int)$formationetudes + (int)$emploi + (int)$agendaeve +
-                                        (int)$procedureorientation + (int)$handicap ;
+                                    $check = $collegientag . $lyceentag . $etudianttag . $jdtag . $parent . $eepa .
+                                        $metier . $formationetudes . $emploi . $agendaeve . $procedureorientation . $handicap ;
 
-                                    if('' != $id && 0 != $check ) {
-                                        $allligne = $id . ";" . $collegientag . ";" . $lyceentag . ";" .
+                                    if('' != $id && '' != $check ) {
+                                        $allligne = $id . "," . $collegientag . "," . $lyceentag . "," .
                                             $etudianttag . ";" . $jdtag . ";" . $parent . ";" .
                                             $eepa . ";" . $metier . ";" . $formationetudes . ";" .
                                             $emploi . ";" . $agendaeve . ";" . $procedureorientation . ";" .$handicap ;
